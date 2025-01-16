@@ -14,32 +14,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editor.scss */ "./src/bar-chart/editor.scss");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__);
-/**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
- */
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./editor.scss */ "./src/bar-chart/editor.scss");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
 
 
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
 
 
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * Those files can contain any CSS code that gets applied to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
 
 
 /**
@@ -51,10 +38,126 @@ __webpack_require__.r(__webpack_exports__);
  * @return {Element} Element to render.
  */
 
-function Edit() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-    ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)(),
-    children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("This is the bar chart!", "ifused-charts")
+function handleClick(e) {
+  console.log("clicked to add");
+}
+function Edit({
+  attributes,
+  setAttributes
+}) {
+  const {
+    chartTitle,
+    chartId,
+    datasetLabel,
+    datasetBgColor,
+    points
+  } = attributes;
+
+  // Function to add a new point to the array
+  const handleAddPoint = () => {
+    const newPoints = [...points, {
+      pointLabel: "",
+      pointValue: 0,
+      pointColor: "#000000"
+    }];
+    setAttributes({
+      points: newPoints
+    });
+  };
+
+  // Function to update a specific property of an object in the array
+  const handleUpdatePoint = (index, key, value) => {
+    const newPoints = points.map((point, i) => {
+      if (i === index) {
+        return {
+          ...point,
+          [key]: value
+        };
+      }
+      return point;
+    });
+    setAttributes({
+      points: newPoints
+    });
+  };
+
+  // Function to remove a specific object from the array
+  const handleRemovePoint = index => {
+    const newPoints = points.filter((el, i) => i !== index); // Filter out the object at the given index
+    setAttributes({
+      points: newPoints
+    });
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)(),
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(`This is the bar chart for ${chartTitle}! `, "ifused-charts")
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+      children: "It will be rendered on the frontend."
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chart Settings", "ifused-charts"),
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+          label: "Chart Title",
+          value: chartTitle,
+          onChange: value => setAttributes({
+            chartTitle: value
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+          label: "Chart Id",
+          value: chartId,
+          help: "set a unique css id selector",
+          onChange: value => setAttributes({
+            chartId: value
+          })
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chart Data ", "ifused-charts"),
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+          label: "Dataset Label",
+          value: datasetLabel,
+          onChange: value => setAttributes({
+            datasetLabel: value
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+          class: "components-base-control__label ffda-b-cd-ae-fdacfdc-2o4jwd ej5x27r2",
+          for: "inspector-text-control-2",
+          children: "DATASET COLOR"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPicker, {
+          color: datasetBgColor,
+          onChangeComplete: color => setAttributes({
+            datasetBgColor: color.hex
+          })
+        }), points.map((point, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          style: {
+            border: "1px solid #ccc",
+            padding: "10px",
+            marginBottom: "10px"
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+            label: "Label",
+            value: point.pointLabel,
+            onChange: value => handleUpdatePoint(index, "pointLabel", value)
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+            label: "Value",
+            type: "number",
+            value: point.pointValue,
+            onChange: value => handleUpdatePoint(index, "pointValue", parseInt(value, 10))
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+            isDestructive: true,
+            onClick: () => handleRemovePoint(index),
+            style: {
+              marginTop: "10px"
+            },
+            children: "Remove Point"
+          })]
+        }, index)), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+          isPrimary: true,
+          onClick: handleAddPoint,
+          children: "Add Point"
+        })]
+      })]
+    })]
   });
 }
 
@@ -86,18 +189,6 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * All files containing `style` keyword are bundled together. The code used
- * gets applied both to the front of your site and to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
-
-
-/**
- * Internal dependencies
- */
 
 
 
@@ -125,43 +216,6 @@ function renderChart(ref, type, data) {
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_3__.name, {
   edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
-/*
-registerBlockType("my-charts/bar-chart", {
-	edit({ attributes, setAttributes }) {
-		const chartRef = useRef(null);
-
-		useEffect(() => {
-			try {
-				const parsedData = JSON.parse(attributes.data);
-				renderChart(chartRef, "bar", parsedData);
-			} catch (e) {
-				console.error("Invalid chart data", e);
-			}
-		}, [attributes.data]);
-
-		return (
-			<div>
-				<InspectorControls>
-					<PanelBody title="Chart Data">
-						<TextareaControl
-							label="Chart Data (JSON)"
-							value={attributes.data}
-							onChange={(data) => setAttributes({ data })}
-						/>
-					</PanelBody>
-				</InspectorControls>
-				<canvas
-					ref={chartRef}
-					style={{ width: "100%", height: "300px" }}
-				></canvas>
-			</div>
-		);
-	},
-	save() {
-		return <div>Chart will render on the front-end.</div>;
-	},
-});
-*/
 
 /***/ }),
 
@@ -186,6 +240,16 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
+
+/***/ }),
+
+/***/ "react":
+/*!************************!*\
+  !*** external "React" ***!
+  \************************/
+/***/ ((module) => {
+
+module.exports = window["React"];
 
 /***/ }),
 
@@ -15377,7 +15441,7 @@ function styleChanged(style, prevStyle) {
   \**********************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"ifused-charts/bar-chart","version":"0.1.0","title":"Bar Chart","category":"design","icon":"smiley","description":"A bar chart from Chart.js.","example":{},"supports":{"html":true},"textdomain":"ifused-charts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"ifused-charts/bar-chart","version":"0.1.0","title":"Bar Chart","category":"design","icon":"smiley","description":"A bar chart from Chart.js.","example":{},"supports":{"html":true},"attributes":{"chartTitle":{"type":"string","default":"Default Chart Title"},"chartId":{"type":"string","default":"ifused_barchart_#"},"datasetLabel":{"type":"string","default":"dataset 1"},"datasetBgColor":{"type":"string","default":"#999"},"points":{"type":"array","items":{"type":"object","properties":{"pointLabel":{"type":"string"},"pointValue":{"type":"number"},"pointColor":{"type":"string"}}},"default":[]}},"textdomain":"ifused-charts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
 
 /***/ })
 

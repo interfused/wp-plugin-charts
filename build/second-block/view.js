@@ -25,7 +25,7 @@
  */
 
 /* eslint-disable no-console */
-console.log('Hello World! (from ifused-charts-ifused-charts block)');
+console.log("Hello (from ifused-charts-ifused-charts block)");
 /* eslint-enable no-console */
 /******/ })()
 ;

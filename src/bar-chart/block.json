@@ -11,6 +11,37 @@
 	"supports": {
 		"html": true
 	},
+	"attributes": {
+		"chartTitle": {
+			"type": "string",
+			"default": "Default Chart Title"
+		},
+		"chartId": {
+			"type": "string",
+			"default": "ifused_barchart_#"
+		},
+		"datasetLabel": {
+			"type": "string",
+			"default": "dataset 1"
+		},
+		"datasetBgColor": {
+			"type": "string",
+			"default": "#999"
+		},
+
+		"points": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"pointLabel": { "type": "string" },
+					"pointValue": { "type": "number" },
+					"pointColor": { "type": "string" }
+				}
+			},
+			"default": []
+		}
+	},
 	"textdomain": "ifused-charts",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

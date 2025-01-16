@@ -1,25 +1,52 @@
-/**
- * Use this file for JavaScript code that you want to run in the front-end
- * on posts/pages that contain this block.
- *
- * When this file is defined as the value of the `viewScript` property
- * in `block.json` it will be enqueued on the front end of the site.
- *
- * Example:
- *
- * ```js
- * {
- *   "viewScript": "file:./view.js"
- * }
- * ```
- *
- * If you're not making any changes to this file because your project doesn't need any
- * JavaScript running in the front-end, then you should delete this file and remove
- * the `viewScript` property from `block.json`.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-metadata/#view-script
- */
+import Chart from "chart.js/auto";
 
 /* eslint-disable no-console */
-console.log( 'Hello World! (from ifused-charts-ifused-charts block)' );
+console.log("Hello World! (from ifused-charts-bar-chart block)");
 /* eslint-enable no-console */
+
+// Check if the block is rendered on the frontend (after page load)
+document.addEventListener("DOMContentLoaded", () => {
+	// Get all the chart elements (identified by a class in render.php)
+	const chartDivs = document.querySelectorAll(
+		".wp-block-ifused-bar-chart-block",
+	);
+
+	chartDivs.forEach((div) => {
+		console.log(`bar chart div has data-points`);
+		const pointsData = JSON.parse(div.getAttribute("data-points")); // Assuming you saved it as a data attribute
+		console.dir(pointsData);
+		const ctx = div.querySelector(".ifused_barchart");
+		console.dir(ctx);
+		new Chart(ctx, {
+			type: "bar",
+			data: {
+				labels: pointsData.map((el) => el.pointLabel),
+				datasets: [
+					{
+						label: div.getAttribute("data-pointslabel1"),
+						backgroundColor: div.getAttribute("data-set1Bgcolor"),
+						data: pointsData.map((el) => el.pointValue),
+						borderWidth: 1,
+					},
+				],
+			},
+			options: {
+				scales: {
+					y: {
+						beginAtZero: true,
+					},
+				},
+				responsive: true,
+				plugins: {
+					legend: {
+						position: "top",
+					},
+					title: {
+						display: true,
+						text: div.getAttribute("data-chart-title"),
+					},
+				},
+			},
+		});
+	});
+});
