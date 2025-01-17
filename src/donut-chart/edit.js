@@ -12,21 +12,12 @@ import Chart from "chart.js/auto";
 import "./editor.scss";
 
 /**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
  *
  * @return {Element} Element to render.
  */
 
-function handleClick(e) {
-	console.log("clicked to add");
-}
-
 export default function Edit({ attributes, setAttributes }) {
-	const { chartTitle, chartId, datasetLabel, datasetBgColor, points } =
-		attributes;
+	const { chartTitle, chartId, datasetLabel, points } = attributes;
 
 	const chartRef = useRef(null); // Reference to the Chart.js instance
 	const canvasRef = useRef(null); // Reference to the canvas DOM element
@@ -68,24 +59,21 @@ export default function Edit({ attributes, setAttributes }) {
 
 		// Create a new chart instance
 		chartRef.current = new Chart(ctx, {
-			type: "bar",
+			type: "doughnut",
+
 			data: {
 				labels: points.map((el) => el.pointLabel),
 				datasets: [
 					{
 						label: datasetLabel,
-						backgroundColor: datasetBgColor,
 						data: points.map((el) => el.pointValue),
+						backgroundColor: points.map((el) => el.pointColor),
 						borderWidth: 1,
+						hoverOffset: 4,
 					},
 				],
 			},
 			options: {
-				scales: {
-					y: {
-						beginAtZero: true,
-					},
-				},
 				responsive: true,
 				plugins: {
 					legend: {
@@ -103,7 +91,7 @@ export default function Edit({ attributes, setAttributes }) {
 	useEffect(() => {
 		console.log("chart title changed");
 		initializeChart();
-	}, [chartTitle, datasetLabel, datasetBgColor, points]);
+	}, [chartTitle, datasetLabel, points]);
 
 	return (
 		<div {...useBlockProps()}>
@@ -128,18 +116,6 @@ export default function Edit({ attributes, setAttributes }) {
 						value={datasetLabel}
 						onChange={(value) => setAttributes({ datasetLabel: value })}
 					/>
-					<label
-						class="components-base-control__label ffda-b-cd-ae-fdacfdc-2o4jwd ej5x27r2"
-						for="inspector-text-control-2"
-					>
-						DATASET COLOR
-					</label>
-					<ColorPicker
-						color={datasetBgColor}
-						onChangeComplete={(color) =>
-							setAttributes({ datasetBgColor: color.hex })
-						}
-					/>
 					<h2 className="mt-4">DATA POINTS</h2>
 					{points.map((point, index) => (
 						<div key={index} className="datapoint">
@@ -162,7 +138,6 @@ export default function Edit({ attributes, setAttributes }) {
 								}
 							/>
 
-							{/* Input for pointColor 
 							<div>
 								<label>Color</label>
 								<ColorPicker
@@ -172,7 +147,6 @@ export default function Edit({ attributes, setAttributes }) {
 									}
 								/>
 							</div>
-							*/}
 
 							{/* Remove Button */}
 							<Button
@@ -192,13 +166,12 @@ export default function Edit({ attributes, setAttributes }) {
 				</PanelBody>
 			</InspectorControls>
 			<div
-				className="wp-block-ifused-bar-chart-block"
-				data-set1Bgcolor={datasetBgColor}
+				className="wp-block-ifused-donut-chart-block"
 				data-pointslabel1={datasetLabel}
 				data-chart-title={chartTitle}
 				data-points={points}
 			>
-				<canvas ref={canvasRef} id={chartId} class="ifused_barchart"></canvas>
+				<canvas ref={canvasRef} id={chartId} class="ifused_donutchart"></canvas>
 			</div>
 		</div>
 	);

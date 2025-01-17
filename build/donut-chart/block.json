@@ -1,12 +1,12 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "ifused-charts/bar-chart",
+  "name": "ifused-charts/donut-chart",
   "version": "0.1.0",
-  "title": "Bar Chart",
+  "title": "Donut Chart",
   "category": "interfused-chartsjs",
-  "icon": "chart-bar",
-  "description": "A bar chart from Chart.js.",
+  "icon": "chart-pie",
+  "description": "A donut chart from Chart.js.",
   "example": {},
   "supports": {
     "html": true
@@ -18,7 +18,7 @@
     },
     "chartId": {
       "type": "string",
-      "default": "ifused_barchart_#"
+      "default": "ifused_donutchart_#"
     },
     "datasetLabel": {
       "type": "string",
