@@ -1,5 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import { useBlockProps, InspectorControls } from "@wordpress/block-editor";
 import {
@@ -8,6 +8,7 @@ import {
 	Button,
 	ColorPicker,
 } from "@wordpress/components";
+import Chart from "chart.js/auto";
 import "./editor.scss";
 
 /**
@@ -26,6 +27,9 @@ function handleClick(e) {
 export default function Edit({ attributes, setAttributes }) {
 	const { chartTitle, chartId, datasetLabel, datasetBgColor, points } =
 		attributes;
+
+	const chartRef = useRef(null); // Reference to the Chart.js instance
+	const canvasRef = useRef(null); // Reference to the canvas DOM element
 
 	// Function to add a new point to the array
 	const handleAddPoint = () => {
@@ -53,10 +57,56 @@ export default function Edit({ attributes, setAttributes }) {
 		setAttributes({ points: newPoints });
 	};
 
+	// Function to initialize or update the Chart.js instance
+	const initializeChart = () => {
+		const ctx = canvasRef.current;
+
+		// Destroy existing chart instance if it exists
+		if (chartRef.current) {
+			chartRef.current.destroy();
+		}
+
+		// Create a new chart instance
+		chartRef.current = new Chart(ctx, {
+			type: "bar",
+			data: {
+				labels: points.map((el) => el.pointLabel),
+				datasets: [
+					{
+						label: datasetLabel,
+						backgroundColor: datasetBgColor,
+						data: points.map((el) => el.pointValue),
+						borderWidth: 1,
+					},
+				],
+			},
+			options: {
+				scales: {
+					y: {
+						beginAtZero: true,
+					},
+				},
+				responsive: true,
+				plugins: {
+					legend: {
+						position: "top",
+					},
+					title: {
+						display: true,
+						text: chartTitle,
+					},
+				},
+			},
+		});
+	};
+
+	useEffect(() => {
+		console.log("chart title changed");
+		initializeChart();
+	}, [chartTitle, datasetLabel, datasetBgColor, points]);
+
 	return (
 		<div {...useBlockProps()}>
-			<p>{__(`This is the bar chart for ${chartTitle}! `, "ifused-charts")}</p>
-			<p>It will be rendered on the frontend.</p>
 			<InspectorControls>
 				<PanelBody title={__("Chart Settings", "ifused-charts")}>
 					<TextControl
@@ -90,19 +140,12 @@ export default function Edit({ attributes, setAttributes }) {
 							setAttributes({ datasetBgColor: color.hex })
 						}
 					/>
-
+					<h2 className="mt-4">DATA POINTS</h2>
 					{points.map((point, index) => (
-						<div
-							key={index}
-							style={{
-								border: "1px solid #ccc",
-								padding: "10px",
-								marginBottom: "10px",
-							}}
-						>
+						<div key={index} className="datapoint">
 							{/* Input for pointLabel */}
 							<TextControl
-								label="Label"
+								label="Data Point Label"
 								value={point.pointLabel}
 								onChange={(value) =>
 									handleUpdatePoint(index, "pointLabel", value)
@@ -137,17 +180,26 @@ export default function Edit({ attributes, setAttributes }) {
 								onClick={() => handleRemovePoint(index)}
 								style={{ marginTop: "10px" }}
 							>
-								Remove Point
+								Remove Data Point
 							</Button>
 						</div>
 					))}
 
 					{/* Add Button */}
-					<Button isPrimary onClick={handleAddPoint}>
-						Add Point
+					<Button className="mt-4" isPrimary onClick={handleAddPoint}>
+						Add New Data Point
 					</Button>
 				</PanelBody>
 			</InspectorControls>
+			<div
+				className="wp-block-ifused-bar-chart-block"
+				data-set1Bgcolor={datasetBgColor}
+				data-pointslabel1={datasetLabel}
+				data-chart-title={chartTitle}
+				data-points={points}
+			>
+				<canvas ref={canvasRef} id={chartId} class="ifused_barchart"></canvas>
+			</div>
 		</div>
 	);
 }
