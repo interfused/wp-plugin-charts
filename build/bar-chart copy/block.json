@@ -4,8 +4,8 @@
   "name": "ifused-charts/bar-chart",
   "version": "0.1.0",
   "title": "Bar Chart",
-  "category": "interfused-chartsjs",
-  "icon": "chart-bar",
+  "category": "design",
+  "icon": "smiley",
   "description": "A bar chart from Chart.js.",
   "example": {},
   "supports": {

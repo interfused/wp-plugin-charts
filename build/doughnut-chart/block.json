@@ -3,10 +3,10 @@
   "apiVersion": 3,
   "name": "ifused-charts/bar-chart",
   "version": "0.1.0",
-  "title": "Bar Chart",
-  "category": "interfused-chartsjs",
-  "icon": "chart-bar",
-  "description": "A bar chart from Chart.js.",
+  "title": "Donut Chart",
+  "category": "design",
+  "icon": "smiley",
+  "description": "A donut chart from Chart.js.",
   "example": {},
   "supports": {
     "html": true

@@ -26,9 +26,25 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function ifused_charts_ifused_charts_block_init() {
 	
-	$block_folders = ['/second-block','/bar-chart','/basic-input-sample'];
+	$block_folders = ['/bar-chart','/line-chart','/donut-chart'];
 	foreach($block_folders as $block_folder){
 		register_block_type( __DIR__ . '/build'. $block_folder );
 	}
 }
 add_action( 'init', 'ifused_charts_ifused_charts_block_init' );
+
+add_filter( 'block_categories_all', 'my_plugin_add_block_category', 10, 2 );
+
+function my_plugin_add_block_category( $categories, $post ) {
+    // Add your custom block category
+    return array_merge(
+        $categories,
+        [
+            [
+                'slug'  => 'interfused-chartsjs',
+                'title' => __( 'Charts', 'ifused-charts' ),
+                'icon'  => null, // Optional: Add an icon here if desired
+            ],
+        ]
+    );
+}

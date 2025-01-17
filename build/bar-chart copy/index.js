@@ -2,10 +2,10 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/bar-chart/edit.js":
-/*!*******************************!*\
-  !*** ./src/bar-chart/edit.js ***!
-  \*******************************/
+/***/ "./src/bar-chart copy/edit.js":
+/*!************************************!*\
+  !*** ./src/bar-chart copy/edit.js ***!
+  \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -21,7 +21,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var chart_js_auto__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! chart.js/auto */ "./node_modules/chart.js/auto/auto.js");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/bar-chart/editor.scss");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/bar-chart copy/editor.scss");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
 
@@ -219,18 +219,18 @@ function Edit({
 
 /***/ }),
 
-/***/ "./src/bar-chart/index.js":
-/*!********************************!*\
-  !*** ./src/bar-chart/index.js ***!
-  \********************************/
+/***/ "./src/bar-chart copy/index.js":
+/*!*************************************!*\
+  !*** ./src/bar-chart copy/index.js ***!
+  \*************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./src/bar-chart/style.scss");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/bar-chart/edit.js");
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./block.json */ "./src/bar-chart/block.json");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./src/bar-chart copy/style.scss");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/bar-chart copy/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./block.json */ "./src/bar-chart copy/block.json");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
@@ -275,10 +275,10 @@ function renderChart(ref, type, data) {
 
 /***/ }),
 
-/***/ "./src/bar-chart/editor.scss":
-/*!***********************************!*\
-  !*** ./src/bar-chart/editor.scss ***!
-  \***********************************/
+/***/ "./src/bar-chart copy/editor.scss":
+/*!****************************************!*\
+  !*** ./src/bar-chart copy/editor.scss ***!
+  \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -287,10 +287,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/bar-chart/style.scss":
-/*!**********************************!*\
-  !*** ./src/bar-chart/style.scss ***!
-  \**********************************/
+/***/ "./src/bar-chart copy/style.scss":
+/*!***************************************!*\
+  !*** ./src/bar-chart copy/style.scss ***!
+  \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -15491,13 +15491,13 @@ function styleChanged(style, prevStyle) {
 
 /***/ }),
 
-/***/ "./src/bar-chart/block.json":
-/*!**********************************!*\
-  !*** ./src/bar-chart/block.json ***!
-  \**********************************/
+/***/ "./src/bar-chart copy/block.json":
+/*!***************************************!*\
+  !*** ./src/bar-chart copy/block.json ***!
+  \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"ifused-charts/bar-chart","version":"0.1.0","title":"Bar Chart","category":"interfused-chartsjs","icon":"chart-bar","description":"A bar chart from Chart.js.","example":{},"supports":{"html":true},"attributes":{"chartTitle":{"type":"string","default":"Default Chart Title"},"chartId":{"type":"string","default":"ifused_barchart_#"},"datasetLabel":{"type":"string","default":"dataset 1"},"datasetBgColor":{"type":"string","default":"#999"},"points":{"type":"array","items":{"type":"object","properties":{"pointLabel":{"type":"string"},"pointValue":{"type":"number"},"pointColor":{"type":"string"}}},"default":[]}},"textdomain":"ifused-charts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"ifused-charts/bar-chart","version":"0.1.0","title":"Bar Chart","category":"design","icon":"smiley","description":"A bar chart from Chart.js.","example":{},"supports":{"html":true},"attributes":{"chartTitle":{"type":"string","default":"Default Chart Title"},"chartId":{"type":"string","default":"ifused_barchart_#"},"datasetLabel":{"type":"string","default":"dataset 1"},"datasetBgColor":{"type":"string","default":"#999"},"points":{"type":"array","items":{"type":"object","properties":{"pointLabel":{"type":"string"},"pointValue":{"type":"number"},"pointColor":{"type":"string"}}},"default":[]}},"textdomain":"ifused-charts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
 
 /***/ })
 
@@ -15611,8 +15611,8 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			"bar-chart/index": 0,
-/******/ 			"bar-chart/style-index": 0
+/******/ 			"bar-chart copy/index": 0,
+/******/ 			"bar-chart copy/style-index": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -15662,7 +15662,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["bar-chart/style-index"], () => (__webpack_require__("./src/bar-chart/index.js")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["bar-chart copy/style-index"], () => (__webpack_require__("./src/bar-chart copy/index.js")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

@@ -2,10 +2,10 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/bar-chart/edit.js":
-/*!*******************************!*\
-  !*** ./src/bar-chart/edit.js ***!
-  \*******************************/
+/***/ "./src/donut-chart copy/edit.js":
+/*!**************************************!*\
+  !*** ./src/donut-chart copy/edit.js ***!
+  \**************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -21,7 +21,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var chart_js_auto__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! chart.js/auto */ "./node_modules/chart.js/auto/auto.js");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/bar-chart/editor.scss");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/donut-chart copy/editor.scss");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
 
@@ -32,17 +32,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
  *
  * @return {Element} Element to render.
  */
 
-function handleClick(e) {
-  console.log("clicked to add");
-}
 function Edit({
   attributes,
   setAttributes
@@ -51,7 +44,6 @@ function Edit({
     chartTitle,
     chartId,
     datasetLabel,
-    datasetBgColor,
     points
   } = attributes;
   const chartRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null); // Reference to the Chart.js instance
@@ -104,22 +96,18 @@ function Edit({
 
     // Create a new chart instance
     chartRef.current = new chart_js_auto__WEBPACK_IMPORTED_MODULE_4__["default"](ctx, {
-      type: "bar",
+      type: "doughnut",
       data: {
         labels: points.map(el => el.pointLabel),
         datasets: [{
           label: datasetLabel,
-          backgroundColor: datasetBgColor,
           data: points.map(el => el.pointValue),
-          borderWidth: 1
+          backgroundColor: points.map(el => el.pointColor),
+          borderWidth: 1,
+          hoverOffset: 4
         }]
       },
       options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        },
         responsive: true,
         plugins: {
           legend: {
@@ -136,10 +124,12 @@ function Edit({
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     console.log("chart title changed");
     initializeChart();
-  }, [chartTitle, datasetLabel, datasetBgColor, points]);
+  }, [chartTitle, datasetLabel, points]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
     ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)(),
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
+      children: "DONUT SAMPLE"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chart Settings", "ifused-charts"),
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
@@ -164,15 +154,6 @@ function Edit({
           onChange: value => setAttributes({
             datasetLabel: value
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
-          class: "components-base-control__label ffda-b-cd-ae-fdacfdc-2o4jwd ej5x27r2",
-          for: "inspector-text-control-2",
-          children: "DATASET COLOR"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPicker, {
-          color: datasetBgColor,
-          onChangeComplete: color => setAttributes({
-            datasetBgColor: color.hex
-          })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
           className: "mt-4",
           children: "DATA POINTS"
@@ -187,6 +168,13 @@ function Edit({
             type: "number",
             value: point.pointValue,
             onChange: value => handleUpdatePoint(index, "pointValue", parseInt(value, 10))
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+              children: "Color"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPicker, {
+              color: point.pointColor,
+              onChangeComplete: color => handleUpdatePoint(index, "pointColor", color.hex)
+            })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
             isDestructive: true,
             onClick: () => handleRemovePoint(index),
@@ -203,15 +191,14 @@ function Edit({
         })]
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-      className: "wp-block-ifused-bar-chart-block",
-      "data-set1Bgcolor": datasetBgColor,
+      className: "wp-block-ifused-donut-chart-block",
       "data-pointslabel1": datasetLabel,
       "data-chart-title": chartTitle,
       "data-points": points,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("canvas", {
         ref: canvasRef,
         id: chartId,
-        class: "ifused_barchart"
+        class: "ifused_donutchart"
       })
     })]
   });
@@ -219,18 +206,18 @@ function Edit({
 
 /***/ }),
 
-/***/ "./src/bar-chart/index.js":
-/*!********************************!*\
-  !*** ./src/bar-chart/index.js ***!
-  \********************************/
+/***/ "./src/donut-chart copy/index.js":
+/*!***************************************!*\
+  !*** ./src/donut-chart copy/index.js ***!
+  \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./src/bar-chart/style.scss");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/bar-chart/edit.js");
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./block.json */ "./src/bar-chart/block.json");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./src/donut-chart copy/style.scss");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/donut-chart copy/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./block.json */ "./src/donut-chart copy/block.json");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
@@ -275,10 +262,10 @@ function renderChart(ref, type, data) {
 
 /***/ }),
 
-/***/ "./src/bar-chart/editor.scss":
-/*!***********************************!*\
-  !*** ./src/bar-chart/editor.scss ***!
-  \***********************************/
+/***/ "./src/donut-chart copy/editor.scss":
+/*!******************************************!*\
+  !*** ./src/donut-chart copy/editor.scss ***!
+  \******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -287,10 +274,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/bar-chart/style.scss":
-/*!**********************************!*\
-  !*** ./src/bar-chart/style.scss ***!
-  \**********************************/
+/***/ "./src/donut-chart copy/style.scss":
+/*!*****************************************!*\
+  !*** ./src/donut-chart copy/style.scss ***!
+  \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -15491,13 +15478,13 @@ function styleChanged(style, prevStyle) {
 
 /***/ }),
 
-/***/ "./src/bar-chart/block.json":
-/*!**********************************!*\
-  !*** ./src/bar-chart/block.json ***!
-  \**********************************/
+/***/ "./src/donut-chart copy/block.json":
+/*!*****************************************!*\
+  !*** ./src/donut-chart copy/block.json ***!
+  \*****************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"ifused-charts/bar-chart","version":"0.1.0","title":"Bar Chart","category":"interfused-chartsjs","icon":"chart-bar","description":"A bar chart from Chart.js.","example":{},"supports":{"html":true},"attributes":{"chartTitle":{"type":"string","default":"Default Chart Title"},"chartId":{"type":"string","default":"ifused_barchart_#"},"datasetLabel":{"type":"string","default":"dataset 1"},"datasetBgColor":{"type":"string","default":"#999"},"points":{"type":"array","items":{"type":"object","properties":{"pointLabel":{"type":"string"},"pointValue":{"type":"number"},"pointColor":{"type":"string"}}},"default":[]}},"textdomain":"ifused-charts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"ifused-charts/donut-chart","version":"0.1.0","title":"Donut Chart","category":"interfused-chartsjs","icon":"chart-pie","description":"A donut chart from Chart.js.","example":{},"supports":{"html":true},"attributes":{"chartTitle":{"type":"string","default":"Default Chart Title"},"chartId":{"type":"string","default":"ifused_donutchart_#"},"datasetLabel":{"type":"string","default":"dataset 1"},"datasetBgColor":{"type":"string","default":"#999"},"points":{"type":"array","items":{"type":"object","properties":{"pointLabel":{"type":"string"},"pointValue":{"type":"number"},"pointColor":{"type":"string"}}},"default":[]}},"textdomain":"ifused-charts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
 
 /***/ })
 
@@ -15611,8 +15598,8 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			"bar-chart/index": 0,
-/******/ 			"bar-chart/style-index": 0
+/******/ 			"donut-chart copy/index": 0,
+/******/ 			"donut-chart copy/style-index": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -15662,7 +15649,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["bar-chart/style-index"], () => (__webpack_require__("./src/bar-chart/index.js")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["donut-chart copy/style-index"], () => (__webpack_require__("./src/donut-chart copy/index.js")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

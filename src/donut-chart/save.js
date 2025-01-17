@@ -17,7 +17,8 @@ export default function Save({ attributes }) {
 		attributes;
 	return (
 		<div {...useBlockProps.save()}>
-			<p>{__("This is the bar chart!", "ifused-charts")}</p>
+			<p>{__("This is the donut chart!", "ifused-charts")}</p>
+
 			<h2>{chartTitle}</h2>
 			<ul className={datasetLabel} data-set1Bbgcolor={datasetBgColor}>
 				{points.map((point, index) => (
